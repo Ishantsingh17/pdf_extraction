@@ -1,0 +1,24 @@
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+pydantic==2.10.5
+pydantic-settings==2.7.1
+SQLAlchemy==2.0.36
+PyMuPDF==1.25.2
+Pillow==11.1.0
+python-dateutil==2.9.0.post0
+
+# --- OCR (images and scanned PDFs) -----------------------------------------
+# OCR and layout analysis sit behind service abstractions (OCRService /
+# StructureAnalyzer), so the app still runs if no engine is installed - it
+# falls back to manual entry with the bill kept on screen.
+#
+# pytesseract also needs the Tesseract binary on PATH:
+#   Windows:  winget install UB-Mannheim.TesseractOCR
+#   macOS:    brew install tesseract
+#   Linux:    apt install tesseract-ocr
+pytesseract==0.3.13
+
+# PP-StructureV3 is the intended layout engine but has no wheels for
+# Python 3.13; on Python <= 3.12 install it to enable the PP-Structure adapter:
+#   pip install paddlepaddle paddleocr

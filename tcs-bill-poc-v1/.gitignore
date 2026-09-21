@@ -1,0 +1,17 @@
+# Python
+backend/.venv/
+__pycache__/
+*.pyc
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# Local data: uploaded bills, generated samples and the POC database
+data/uploads/
+data/processed/
+data/samples/
+data/*.db
+
+# Local settings (never commit: may contain paths/secrets)
+backend/.env

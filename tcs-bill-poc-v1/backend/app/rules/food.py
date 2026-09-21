@@ -1,0 +1,116 @@
+"""Food claim-head schema (TRD section 9)."""
+from __future__ import annotations
+
+from app.rules.common import ClaimHeadSchema, FieldSpec
+
+FOOD_SCHEMA = ClaimHeadSchema(
+    key="FOOD",
+    label="Food",
+    fields=(
+        FieldSpec(
+            name="hotel_name",
+            label="Hotel Name",
+            value_type="text",
+            anchors=(
+                "hotel",
+                "restaurant",
+                "merchant",
+                "vendor",
+                "bill from",
+                "sold by",
+                "billed by",
+                "outlet",
+                "cafe",
+                "resto",
+            ),
+            order=1,
+        ),
+        FieldSpec(
+            name="bill_date",
+            label="Bill Date",
+            value_type="date",
+            anchors=(
+                "bill date",
+                "invoice date",
+                "receipt date",
+                "transaction date",
+                "dated",
+                "date",
+            ),
+            negative_anchors=("due date", "date of birth", "expiry date"),
+            order=2,
+        ),
+        FieldSpec(
+            name="bill_no",
+            label="Bill No.",
+            value_type="text",
+            anchors=(
+                "bill no",
+                "bill number",
+                "invoice no",
+                "invoice number",
+                "receipt no",
+                "receipt number",
+                "order no",
+                "order number",
+                "order id",
+                "check no",
+                "token no",
+                "reference no",
+                "ref no",
+                "bill #",
+                "invoice #",
+                # Till receipts label the number with the bare word and a
+                # colon ("BILL:D785I/2526/3192"). Last, so the specific
+                # two-word anchors above always outrank it.
+                "bill",
+                "invoice",
+                "receipt",
+            ),
+            negative_anchors=(
+                "bill date",
+                "bill amount",
+                "bill total",
+                "bill to",
+                "invoice date",
+                "invoice amount",
+                "invoice to",
+                "receipt date",
+            ),
+            required=False,
+            order=3,
+        ),
+        FieldSpec(
+            name="bill_amount",
+            label="Bill Amount",
+            value_type="money",
+            anchors=(
+                "grand total",
+                "total amount payable",
+                "amount payable",
+                "total payable",
+                "net amount",
+                "net payable",
+                "bill total",
+                "total",
+                "amount",
+            ),
+            negative_anchors=("subtotal", "sub total", "tax", "gst", "discount", "tip"),
+            order=4,
+        ),
+        FieldSpec(
+            name="currency",
+            label="Currency",
+            value_type="currency",
+            anchors=("currency", "total", "grand total", "amount"),
+            order=5,
+        ),
+        FieldSpec(
+            name="remarks",
+            label="Remarks",
+            value_type="text",
+            system_value="Food",
+            order=6,
+        ),
+    ),
+)
